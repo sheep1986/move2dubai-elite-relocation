@@ -220,15 +220,15 @@ const StatsSection: React.FC = () => {
   const { ref, isInView } = useInView();
 
   return (
-    <section ref={ref} className="relative py-32 overflow-hidden">
+    <section ref={ref} className="relative py-16 md:py-32 overflow-hidden">
       <div className="absolute inset-0 bg-navy-light" />
       <div className="absolute inset-0 grid-pattern opacity-50" />
 
-      <div className="relative max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4 lg:gap-4">
           {[
             { end: 500, suffix: '+', label: 'Families Relocated', sublabel: 'Since 2019' },
-            { end: 2.5, suffix: 'B+', prefix: '£', label: 'Assets Managed', sublabel: 'Under advisement', isDecimal: true },
+            { end: 5, suffix: 'B+', prefix: '£', label: 'Assets Managed', sublabel: 'Under advisement', isDecimal: true },
             { end: 100, suffix: '%', label: 'Visa Success', sublabel: 'Approval rate' },
             { end: 24, suffix: 'hrs', label: 'Response Time', sublabel: 'Guaranteed' },
           ].map((stat, i) => {
@@ -236,14 +236,14 @@ const StatsSection: React.FC = () => {
             return (
               <div
                 key={i}
-                className={`text-center p-8 transition-all duration-700 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                className={`text-center p-4 sm:p-6 lg:p-8 transition-all duration-700 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
-                <div className="text-5xl md:text-7xl font-display font-bold text-gold stat-value mb-2">
-                  {stat.prefix}{stat.isDecimal ? (count / 10 * 25).toFixed(1) : count}{stat.suffix}
+                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gold stat-value mb-1 sm:mb-2">
+                  {stat.prefix}{stat.isDecimal ? count.toFixed(1) : count}{stat.suffix}
                 </div>
-                <div className="text-white font-medium mb-1">{stat.label}</div>
-                <div className="text-sm text-white/40">{stat.sublabel}</div>
+                <div className="text-white font-medium text-sm sm:text-base mb-0.5 sm:mb-1">{stat.label}</div>
+                <div className="text-xs sm:text-sm text-white/40">{stat.sublabel}</div>
               </div>
             );
           })}
@@ -266,19 +266,19 @@ const ComparisonTable: React.FC = () => {
   ];
 
   return (
-    <section ref={ref} className="py-24 md:py-32 bg-white">
-      <div className="max-w-5xl mx-auto px-6">
-        <AnimatedSection className="text-center mb-16">
+    <section ref={ref} className="py-16 md:py-32 bg-white">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <AnimatedSection className="text-center mb-8 md:mb-16">
           <span className="text-label text-gold uppercase tracking-widest mb-4 block">Tax Comparison</span>
-          <h2 className="text-display-md md:text-display-lg text-navy mb-4">The Financial Reality</h2>
-          <p className="text-body-lg text-slate max-w-2xl mx-auto">A side-by-side comparison of key fiscal metrics between the UK and UAE.</p>
+          <h2 className="text-2xl sm:text-3xl md:text-display-lg text-navy mb-4">The Financial Reality</h2>
+          <p className="text-sm sm:text-base md:text-body-lg text-slate max-w-2xl mx-auto">A side-by-side comparison of key fiscal metrics between the UK and UAE.</p>
         </AnimatedSection>
 
-        <div className="overflow-hidden rounded-2xl border border-slate/10">
+        <div className="overflow-hidden rounded-xl sm:rounded-2xl border border-slate/10">
           <div className="grid grid-cols-3 bg-navy text-white">
-            <div className="p-6 font-semibold">Metric</div>
-            <div className="p-6 font-semibold text-center border-x border-white/10">United Kingdom</div>
-            <div className="p-6 font-semibold text-center bg-gold/10 text-gold">United Arab Emirates</div>
+            <div className="p-3 sm:p-4 md:p-6 font-semibold text-xs sm:text-sm md:text-base">Metric</div>
+            <div className="p-3 sm:p-4 md:p-6 font-semibold text-center border-x border-white/10 text-xs sm:text-sm md:text-base">UK</div>
+            <div className="p-3 sm:p-4 md:p-6 font-semibold text-center bg-gold/10 text-gold text-xs sm:text-sm md:text-base">UAE</div>
           </div>
           {rows.map((row, i) => (
             <div
@@ -288,13 +288,13 @@ const ComparisonTable: React.FC = () => {
               }`}
               style={{ transitionDelay: `${i * 100}ms` }}
             >
-              <div className="p-6 font-medium text-navy">{row.feature}</div>
-              <div className="p-6 text-center text-slate border-x border-slate/10">{row.uk}</div>
-              <div className="p-6 text-center font-semibold text-navy bg-gold/5">{row.uae}</div>
+              <div className="p-3 sm:p-4 md:p-6 font-medium text-navy text-xs sm:text-sm md:text-base">{row.feature}</div>
+              <div className="p-3 sm:p-4 md:p-6 text-center text-slate border-x border-slate/10 text-xs sm:text-sm md:text-base">{row.uk}</div>
+              <div className="p-3 sm:p-4 md:p-6 text-center font-semibold text-navy bg-gold/5 text-xs sm:text-sm md:text-base">{row.uae}</div>
             </div>
           ))}
         </div>
-        <p className="text-sm text-slate mt-4 text-center">*Many Free Zone entities qualify for 0% corporate tax on qualifying income.</p>
+        <p className="text-xs sm:text-sm text-slate mt-4 text-center">*Many Free Zone entities qualify for 0% corporate tax on qualifying income.</p>
       </div>
     </section>
   );

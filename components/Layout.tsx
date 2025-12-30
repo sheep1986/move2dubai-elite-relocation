@@ -47,15 +47,15 @@ export const Header: React.FC<{ onOpenConsultation: () => void }> = ({ onOpenCon
         <button onClick={() => handleNavigate('home')} className="group relative z-[60]">
           <div className="flex flex-col">
             <div className="flex items-baseline">
-              <span className={`text-2xl font-bold tracking-tight transition-colors ${isMenuOpen ? 'text-navy' : (isScrolled ? 'text-navy' : 'text-white')}`}>
+              <span className={`text-2xl font-bold tracking-tight transition-colors ${isMenuOpen ? 'text-white' : (isScrolled ? 'text-navy' : 'text-white')}`}>
                 MOVE
               </span>
               <span className="text-2xl font-bold text-gold">2</span>
-              <span className={`text-2xl font-bold tracking-tight transition-colors ${isMenuOpen ? 'text-navy' : (isScrolled ? 'text-navy' : 'text-white')}`}>
+              <span className={`text-2xl font-bold tracking-tight transition-colors ${isMenuOpen ? 'text-white' : (isScrolled ? 'text-navy' : 'text-white')}`}>
                 DUBAI
               </span>
             </div>
-            <span className={`text-[10px] uppercase tracking-[0.25em] font-medium transition-colors ${isMenuOpen ? 'text-slate' : (isScrolled ? 'text-slate' : 'text-white/60')}`}>
+            <span className={`text-[10px] uppercase tracking-[0.25em] font-medium transition-colors ${isMenuOpen ? 'text-white/60' : (isScrolled ? 'text-slate' : 'text-white/60')}`}>
               Elite Relocation
             </span>
           </div>
@@ -87,7 +87,7 @@ export const Header: React.FC<{ onOpenConsultation: () => void }> = ({ onOpenCon
         {/* Mobile Menu Toggle */}
         <button
           onClick={toggleMenu}
-          className={`lg:hidden relative z-[60] p-2 transition-colors ${isMenuOpen ? 'text-navy' : (isScrolled ? 'text-navy' : 'text-white')}`}
+          className={`lg:hidden relative z-[60] p-2 transition-colors ${isMenuOpen ? 'text-white' : (isScrolled ? 'text-navy' : 'text-white')}`}
           aria-label="Toggle Menu"
         >
           {isMenuOpen ? (
@@ -101,32 +101,53 @@ export const Header: React.FC<{ onOpenConsultation: () => void }> = ({ onOpenCon
           )}
         </button>
 
-        {/* Mobile Menu Overlay */}
-        <div className={`fixed inset-0 bg-white z-50 transition-all duration-500 lg:hidden ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}`}>
-          <div className="h-full flex flex-col justify-center items-center px-6">
-            <nav className="space-y-6 text-center w-full max-w-sm">
+        {/* Mobile Menu Overlay - Premium Design */}
+        <div className={`fixed inset-0 z-50 lg:hidden transition-all duration-500 ${isMenuOpen ? 'visible' : 'invisible'}`}>
+          {/* Background */}
+          <div className={`absolute inset-0 bg-navy transition-opacity duration-500 ${isMenuOpen ? 'opacity-100' : 'opacity-0'}`} />
+
+          {/* Decorative Elements */}
+          <div className={`absolute top-0 right-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl transition-all duration-700 ${isMenuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`} />
+          <div className={`absolute bottom-0 left-0 w-96 h-96 bg-gold/5 rounded-full blur-3xl transition-all duration-700 delay-200 ${isMenuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`} />
+
+          {/* Content */}
+          <div className="relative h-full flex flex-col pt-24 pb-8 px-8">
+            {/* Navigation Links */}
+            <nav className="flex-1 flex flex-col justify-center space-y-2">
               {NAV_LINKS.map((link, i) => (
                 <button
                   key={link.name}
                   onClick={() => handleNavigate(link.path)}
-                  className={`block w-full text-2xl font-display font-semibold text-navy hover:text-gold transition-all duration-300 transform ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
-                  style={{ transitionDelay: `${i * 75}ms` }}
+                  className={`group flex items-center justify-between py-4 border-b border-white/10 transition-all duration-500 ${isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}
+                  style={{ transitionDelay: `${150 + i * 75}ms` }}
                 >
-                  {link.name}
+                  <span className={`text-2xl font-display font-semibold transition-colors ${currentPath === link.path ? 'text-gold' : 'text-white group-hover:text-gold'}`}>
+                    {link.name}
+                  </span>
+                  <svg className={`w-5 h-5 transition-all ${currentPath === link.path ? 'text-gold' : 'text-white/30 group-hover:text-gold group-hover:translate-x-1'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
                 </button>
               ))}
-              <div className={`pt-8 transition-all duration-500 ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`} style={{ transitionDelay: '400ms' }}>
-                <button
-                  onClick={handleConsultation}
-                  className="btn-primary w-full py-4 rounded-lg text-sm uppercase tracking-wider"
-                >
-                  Book Free Consultation
-                </button>
-              </div>
             </nav>
 
-            <div className={`absolute bottom-8 text-center transition-all duration-700 ${isMenuOpen ? 'opacity-100' : 'opacity-0'}`}>
-              <p className="text-xs text-slate uppercase tracking-widest">Elite Relocation Services</p>
+            {/* CTA Button */}
+            <div className={`mt-8 transition-all duration-500 ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: '500ms' }}>
+              <button
+                onClick={handleConsultation}
+                className="btn-primary w-full py-4 rounded-xl text-sm uppercase tracking-wider font-semibold"
+              >
+                Book Free Consultation
+              </button>
+            </div>
+
+            {/* Footer Info */}
+            <div className={`mt-8 pt-6 border-t border-white/10 transition-all duration-700 ${isMenuOpen ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '600ms' }}>
+              <div className="flex items-center justify-between text-white/40 text-xs">
+                <span>Dubai, UAE</span>
+                <span>+971 4 XXX XXXX</span>
+              </div>
+              <p className="text-center text-white/20 text-xs mt-4 uppercase tracking-widest">Elite Relocation Services</p>
             </div>
           </div>
         </div>
