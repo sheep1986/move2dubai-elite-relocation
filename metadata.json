@@ -1,0 +1,8 @@
+{
+  "name": "Move2Dubai | Elite Relocation Concierge",
+  "description": "Bespoke relocation services for HNW individuals and entrepreneurs moving from the UK to Dubai. Private, discreet, and expertly managed.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
