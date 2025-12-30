@@ -7,14 +7,21 @@ const NAV_LINKS = [
   { name: 'Entrepreneurs', path: 'for-entrepreneurs' },
   { name: 'Investors', path: 'for-investors' },
   { name: 'Golden Visa', path: 'golden-visa' },
-  { name: 'Tools', path: 'tools' },
   { name: 'News', path: 'news' },
   { name: 'Insights', path: 'blog' },
+];
+
+const TOOLS_DROPDOWN = [
+  { name: 'All Tools', path: 'tools' },
+  { name: 'Tax Calculator', path: 'tools/tax-calculator' },
+  { name: 'Golden Visa Checker', path: 'tools/golden-visa-checker' },
+  { name: 'Free Zone Comparison', path: 'tools/free-zone-comparison' },
 ];
 
 export const Header: React.FC<{ onOpenConsultation: () => void }> = ({ onOpenConsultation }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isToolsOpen, setIsToolsOpen] = useState(false);
   const { navigate, currentPath } = useNavigation();
 
   useEffect(() => {
@@ -76,6 +83,46 @@ export const Header: React.FC<{ onOpenConsultation: () => void }> = ({ onOpenCon
               {link.name}
             </button>
           ))}
+
+          {/* Tools Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setIsToolsOpen(true)}
+            onMouseLeave={() => setIsToolsOpen(false)}
+          >
+            <button
+              className={`text-sm font-medium transition-colors link-underline flex items-center gap-1 ${
+                currentPath.startsWith('tools')
+                  ? 'text-gold'
+                  : isScrolled ? 'text-slate hover:text-navy' : 'text-white/80 hover:text-white'
+              }`}
+            >
+              Tools
+              <svg className={`w-4 h-4 transition-transform ${isToolsOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {/* Dropdown Menu */}
+            <div className={`absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden transition-all duration-200 ${isToolsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
+              {TOOLS_DROPDOWN.map((tool, i) => (
+                <button
+                  key={tool.path}
+                  onClick={() => { handleNavigate(tool.path); setIsToolsOpen(false); }}
+                  className={`w-full text-left px-4 py-3 text-sm transition-colors ${
+                    i === 0 ? 'border-b border-slate-100 font-medium' : ''
+                  } ${
+                    currentPath === tool.path
+                      ? 'bg-gold/10 text-gold'
+                      : 'text-slate hover:bg-slate-50 hover:text-navy'
+                  }`}
+                >
+                  {tool.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <button
             onClick={onOpenConsultation}
             className="btn-primary px-6 py-3 rounded-lg text-xs uppercase tracking-wider ml-4"
@@ -105,16 +152,16 @@ export const Header: React.FC<{ onOpenConsultation: () => void }> = ({ onOpenCon
         {isMenuOpen && (
           <div className="fixed inset-0 z-[55] lg:hidden bg-[#0A1628]">
             {/* Navigation Content */}
-            <div className="h-full flex flex-col pt-24 pb-8 px-8">
+            <div className="h-full flex flex-col pt-24 pb-8 px-8 overflow-y-auto">
               {/* Navigation Links */}
               <nav className="flex-1 flex flex-col justify-center space-y-1">
-                {NAV_LINKS.map((link, i) => (
+                {NAV_LINKS.map((link) => (
                   <button
                     key={link.name}
                     onClick={() => handleNavigate(link.path)}
-                    className="group flex items-center justify-between py-5 border-b border-white/10"
+                    className="group flex items-center justify-between py-4 border-b border-white/10"
                   >
-                    <span className={`text-2xl font-display font-semibold ${currentPath === link.path ? 'text-gold' : 'text-white'}`}>
+                    <span className={`text-xl font-display font-semibold ${currentPath === link.path ? 'text-gold' : 'text-white'}`}>
                       {link.name}
                     </span>
                     <svg className={`w-5 h-5 ${currentPath === link.path ? 'text-gold' : 'text-white/30'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -122,6 +169,28 @@ export const Header: React.FC<{ onOpenConsultation: () => void }> = ({ onOpenCon
                     </svg>
                   </button>
                 ))}
+
+                {/* Tools Section */}
+                <div className="py-4 border-b border-white/10">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className={`text-xl font-display font-semibold ${currentPath.startsWith('tools') ? 'text-gold' : 'text-white'}`}>
+                      Tools
+                    </span>
+                  </div>
+                  <div className="pl-4 space-y-2">
+                    {TOOLS_DROPDOWN.map((tool) => (
+                      <button
+                        key={tool.path}
+                        onClick={() => handleNavigate(tool.path)}
+                        className={`block w-full text-left py-2 text-base ${
+                          currentPath === tool.path ? 'text-gold' : 'text-white/60 hover:text-white'
+                        }`}
+                      >
+                        {tool.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </nav>
 
               {/* CTA Button */}

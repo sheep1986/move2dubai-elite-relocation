@@ -901,6 +901,10 @@ const App: React.FC = () => {
   const isContact = currentPath === 'contact';
   const isNews = currentPath === 'news';
   const isTools = currentPath === 'tools';
+  const isTaxCalculator = currentPath === 'tools/tax-calculator';
+  const isVisaChecker = currentPath === 'tools/golden-visa-checker';
+  const isFreeZoneComparison = currentPath === 'tools/free-zone-comparison';
+  const isToolPage = isTaxCalculator || isVisaChecker || isFreeZoneComparison;
 
   // Section Renderer
   const renderSection = (section: ContentSection, idx: number) => {
@@ -1079,42 +1083,194 @@ const App: React.FC = () => {
             {/* News Page */}
             {isNews && <DubaiNewsFeed />}
 
-            {/* Tools Page */}
+            {/* Tools Landing Page */}
             {isTools && (
               <section className="bg-alabaster py-16 md:py-24">
                 <div className="max-w-7xl mx-auto px-6">
-                  {/* Tool Navigation */}
-                  <div className="flex flex-wrap justify-center gap-4 mb-12">
+                  {/* Tools Grid */}
+                  <div className="grid md:grid-cols-3 gap-8">
                     {[
-                      { id: 'tax', name: 'Tax Calculator', icon: '💰' },
-                      { id: 'visa', name: 'Golden Visa Checker', icon: '🛂' },
-                      { id: 'freezone', name: 'Free Zone Comparison', icon: '🏢' },
-                    ].map((tool) => (
-                      <a
-                        key={tool.id}
-                        href={`#${tool.id}`}
-                        className="flex items-center gap-2 px-6 py-3 bg-white rounded-xl shadow-sm hover:shadow-md transition-all border border-slate-100 hover:border-gold"
-                      >
-                        <span className="text-xl">{tool.icon}</span>
-                        <span className="font-medium text-navy">{tool.name}</span>
-                      </a>
+                      {
+                        path: 'tools/tax-calculator',
+                        name: 'Tax Savings Calculator',
+                        icon: '💰',
+                        description: 'Calculate how much you could save by relocating to Dubai. Compare your current tax burden with the UAE\'s 0% personal income tax.',
+                        features: ['7 Countries Supported', 'Instant Results', '10-Year Projections']
+                      },
+                      {
+                        path: 'tools/golden-visa-checker',
+                        name: 'Golden Visa Eligibility',
+                        icon: '🛂',
+                        description: 'Find out if you qualify for the UAE Golden Visa. Our checker analyzes your profile and recommends the best pathway.',
+                        features: ['2-Minute Assessment', 'Multiple Pathways', 'Personalized Results']
+                      },
+                      {
+                        path: 'tools/free-zone-comparison',
+                        name: 'Free Zone Comparison',
+                        icon: '🏢',
+                        description: 'Compare 40+ UAE Free Zones side-by-side. Filter by industry, budget, and requirements to find your perfect match.',
+                        features: ['40+ Free Zones', 'Side-by-Side Compare', 'Cost Breakdowns']
+                      },
+                    ].map((tool, i) => (
+                      <AnimatedSection key={tool.path} delay={i * 100}>
+                        <div className="bg-white rounded-2xl p-8 h-full shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-gold/30 group">
+                          <div className="text-5xl mb-6">{tool.icon}</div>
+                          <h3 className="text-xl font-display font-semibold text-navy mb-3 group-hover:text-gold transition-colors">{tool.name}</h3>
+                          <p className="text-slate mb-6">{tool.description}</p>
+                          <ul className="space-y-2 mb-8">
+                            {tool.features.map((feature, j) => (
+                              <li key={j} className="flex items-center gap-2 text-sm text-slate">
+                                <svg className="w-4 h-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                          <button
+                            onClick={() => navigate(tool.path)}
+                            className="w-full btn-primary py-3 rounded-xl text-sm uppercase tracking-wider font-semibold"
+                          >
+                            Use Tool
+                          </button>
+                        </div>
+                      </AnimatedSection>
                     ))}
                   </div>
 
-                  {/* Tax Calculator */}
-                  <div id="tax" className="mb-16 scroll-mt-32">
-                    <TaxCalculator onOpenConsultation={() => setShowConsultation(true)} />
+                  {/* SEO Content */}
+                  <div className="mt-20 max-w-4xl mx-auto">
+                    <AnimatedSection>
+                      <h2 className="text-2xl md:text-3xl font-display font-semibold text-navy mb-6 text-center">Free Tools to Plan Your Dubai Relocation</h2>
+                      <div className="prose prose-slate max-w-none">
+                        <p className="text-slate text-center mb-8">
+                          Moving to Dubai is one of the most significant financial decisions you can make. Our suite of free tools helps you understand the benefits,
+                          check your eligibility, and plan your business setup—all before you speak with a consultant.
+                        </p>
+                      </div>
+                    </AnimatedSection>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* Individual Tool Pages */}
+            {isTaxCalculator && (
+              <section className="bg-alabaster py-16 md:py-24">
+                <div className="max-w-5xl mx-auto px-6">
+                  <TaxCalculator onOpenConsultation={() => setShowConsultation(true)} />
+
+                  {/* SEO Content */}
+                  <div className="mt-16 bg-white rounded-2xl p-8 md:p-12">
+                    <h2 className="text-2xl font-display font-semibold text-navy mb-6">Understanding Dubai's Tax Benefits</h2>
+                    <div className="prose prose-slate max-w-none">
+                      <p>The UAE offers one of the most attractive tax environments in the world. With <strong>0% personal income tax</strong>, <strong>0% capital gains tax</strong>, and <strong>0% inheritance tax</strong>, Dubai has become a magnet for entrepreneurs, investors, and high-net-worth individuals seeking to optimize their financial position.</p>
+                      <p>Our tax calculator helps you visualize the real savings potential. Simply enter your current income, select your country of residence, and see exactly how much you could retain by relocating to Dubai.</p>
+                      <h3>Key Tax Benefits of Dubai Residency:</h3>
+                      <ul>
+                        <li><strong>Personal Income Tax:</strong> 0% on all personal income</li>
+                        <li><strong>Capital Gains Tax:</strong> 0% on investment gains</li>
+                        <li><strong>Inheritance Tax:</strong> 0% with proper planning via DIFC Wills</li>
+                        <li><strong>Corporate Tax:</strong> 9% (with 0% for qualifying Free Zone income)</li>
+                        <li><strong>VAT:</strong> 5% (one of the lowest rates globally)</li>
+                      </ul>
+                    </div>
                   </div>
 
-                  {/* Golden Visa Checker */}
-                  <div id="visa" className="mb-16 scroll-mt-32">
-                    <GoldenVisaChecker onOpenConsultation={() => setShowConsultation(true)} />
+                  {/* FAQs */}
+                  {page.faqs && page.faqs.length > 0 && (
+                    <div className="mt-12">
+                      <h2 className="text-2xl font-display font-semibold text-navy mb-8 text-center">Frequently Asked Questions</h2>
+                      <div className="space-y-4">
+                        {page.faqs.map((faq, i) => (
+                          <div key={i} className="bg-white rounded-xl p-6 border border-slate-100">
+                            <h3 className="font-semibold text-navy mb-2">{faq.question}</h3>
+                            <p className="text-slate">{faq.answer}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </section>
+            )}
+
+            {isVisaChecker && (
+              <section className="bg-alabaster py-16 md:py-24">
+                <div className="max-w-5xl mx-auto px-6">
+                  <GoldenVisaChecker onOpenConsultation={() => setShowConsultation(true)} />
+
+                  {/* SEO Content */}
+                  <div className="mt-16 bg-white rounded-2xl p-8 md:p-12">
+                    <h2 className="text-2xl font-display font-semibold text-navy mb-6">UAE Golden Visa: Your Path to Long-Term Residency</h2>
+                    <div className="prose prose-slate max-w-none">
+                      <p>The <strong>UAE Golden Visa</strong> program, launched in 2019 and expanded in 2022, offers 10-year renewable residency to investors, entrepreneurs, exceptional talents, and their families. Unlike traditional UAE visas, the Golden Visa doesn't require a sponsor and has no minimum stay requirements.</p>
+                      <h3>Golden Visa Categories:</h3>
+                      <ul>
+                        <li><strong>Investors:</strong> Property worth AED 2M+ or investment deposits</li>
+                        <li><strong>Entrepreneurs:</strong> Startup founders with approved projects</li>
+                        <li><strong>Specialized Talents:</strong> Scientists, doctors, engineers, artists</li>
+                        <li><strong>Executives:</strong> Senior managers earning AED 30K+/month</li>
+                        <li><strong>Outstanding Students:</strong> Top graduates from UAE universities</li>
+                      </ul>
+                      <p>Our eligibility checker analyzes your profile against all qualifying categories and recommends the most suitable pathway for your situation.</p>
+                    </div>
                   </div>
 
-                  {/* Free Zone Comparison */}
-                  <div id="freezone" className="scroll-mt-32">
-                    <FreeZoneComparison onOpenConsultation={() => setShowConsultation(true)} />
+                  {/* FAQs */}
+                  {page.faqs && page.faqs.length > 0 && (
+                    <div className="mt-12">
+                      <h2 className="text-2xl font-display font-semibold text-navy mb-8 text-center">Frequently Asked Questions</h2>
+                      <div className="space-y-4">
+                        {page.faqs.map((faq, i) => (
+                          <div key={i} className="bg-white rounded-xl p-6 border border-slate-100">
+                            <h3 className="font-semibold text-navy mb-2">{faq.question}</h3>
+                            <p className="text-slate">{faq.answer}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </section>
+            )}
+
+            {isFreeZoneComparison && (
+              <section className="bg-alabaster py-16 md:py-24">
+                <div className="max-w-7xl mx-auto px-6">
+                  <FreeZoneComparison onOpenConsultation={() => setShowConsultation(true)} />
+
+                  {/* SEO Content */}
+                  <div className="mt-16 bg-white rounded-2xl p-8 md:p-12 max-w-5xl mx-auto">
+                    <h2 className="text-2xl font-display font-semibold text-navy mb-6">Choosing the Right UAE Free Zone</h2>
+                    <div className="prose prose-slate max-w-none">
+                      <p>The UAE is home to <strong>over 40 Free Zones</strong>, each designed to attract specific industries and business types. Free Zones offer significant advantages including 100% foreign ownership, 0% corporate and personal tax, and streamlined company formation.</p>
+                      <h3>Popular UAE Free Zones:</h3>
+                      <ul>
+                        <li><strong>DMCC:</strong> World's #1 Free Zone for commodities and trading</li>
+                        <li><strong>DIFC:</strong> Premier financial hub with Common Law jurisdiction</li>
+                        <li><strong>JAFZA:</strong> Largest Free Zone, ideal for manufacturing and logistics</li>
+                        <li><strong>IFZA:</strong> Cost-effective option for consultants and e-commerce</li>
+                        <li><strong>RAKEZ:</strong> Budget-friendly Free Zone in Ras Al Khaimah</li>
+                      </ul>
+                      <p>Our comparison tool helps you filter Free Zones by industry, budget, visa requirements, and location to find the perfect match for your business needs.</p>
+                    </div>
                   </div>
+
+                  {/* FAQs */}
+                  {page.faqs && page.faqs.length > 0 && (
+                    <div className="mt-12 max-w-5xl mx-auto">
+                      <h2 className="text-2xl font-display font-semibold text-navy mb-8 text-center">Frequently Asked Questions</h2>
+                      <div className="space-y-4">
+                        {page.faqs.map((faq, i) => (
+                          <div key={i} className="bg-white rounded-xl p-6 border border-slate-100">
+                            <h3 className="font-semibold text-navy mb-2">{faq.question}</h3>
+                            <p className="text-slate">{faq.answer}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </section>
             )}
@@ -1209,7 +1365,7 @@ const App: React.FC = () => {
             )}
 
             {/* Regular page content */}
-            {!isHome && !isBlog && !isArticle && !isContact && !isNews && !isTools && (
+            {!isHome && !isBlog && !isArticle && !isContact && !isNews && !isTools && !isToolPage && (
               <>
                 {page.narrativeSection && (
                   <section className="bg-white py-24 md:py-32">

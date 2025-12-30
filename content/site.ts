@@ -604,7 +604,7 @@ export const PAGES: Record<string, PageContent> = {
   'tools': {
     id: 'tools',
     title: 'Relocation Tools',
-    metaTitle: 'Dubai Relocation Tools & Calculators | MOVE2DUBAI',
+    metaTitle: 'Free Dubai Relocation Tools & Calculators | MOVE2DUBAI',
     metaDescription: 'Free tools to plan your Dubai relocation. Tax savings calculator, Golden Visa eligibility checker, and Free Zone comparison tool.',
     heroHeadline: 'Plan Your Move.',
     heroSubheadline: 'Use our suite of free tools to calculate your tax savings, check your Golden Visa eligibility, and compare UAE free zones. Make informed decisions about your Dubai relocation.',
@@ -613,6 +613,60 @@ export const PAGES: Record<string, PageContent> = {
     benefits: [],
     sections: [],
     faqs: []
+  },
+  'tools/tax-calculator': {
+    id: 'tools/tax-calculator',
+    title: 'Tax Savings Calculator',
+    metaTitle: 'Dubai Tax Savings Calculator | Calculate Your Savings | MOVE2DUBAI',
+    metaDescription: 'Calculate how much you could save by relocating to Dubai. Compare income tax, capital gains tax, and more between your country and the UAE\'s 0% tax regime.',
+    heroHeadline: 'Calculate Your Tax Savings.',
+    heroSubheadline: 'Discover the financial benefits of relocating to Dubai. Our tax calculator compares your current tax burden with the UAE\'s favorable 0% personal income tax regime.',
+    heroImage: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=2000',
+    contentImage: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=2000',
+    benefits: [],
+    sections: [],
+    faqs: [
+      { question: 'Is there really 0% income tax in Dubai?', answer: 'Yes. The UAE has no personal income tax, no capital gains tax, no inheritance tax, and no wealth tax. This applies to all residents regardless of nationality.' },
+      { question: 'How accurate is this calculator?', answer: 'Our calculator uses current tax brackets and rates for each country. However, individual circumstances vary, so we recommend consulting with a tax professional for precise figures.' },
+      { question: 'What about corporate tax in Dubai?', answer: 'The UAE introduced a 9% corporate tax in 2023 for profits exceeding AED 375,000. However, many Free Zone businesses qualify for 0% corporate tax on qualifying income.' },
+      { question: 'Do I need to pay tax in my home country after moving?', answer: 'This depends on your country\'s tax residency rules. Most countries require you to properly exit tax residency. Our advisors can connect you with international tax specialists.' }
+    ]
+  },
+  'tools/golden-visa-checker': {
+    id: 'tools/golden-visa-checker',
+    title: 'Golden Visa Eligibility',
+    metaTitle: 'UAE Golden Visa Eligibility Checker | Check Your Qualification | MOVE2DUBAI',
+    metaDescription: 'Check if you qualify for the UAE Golden Visa. Our eligibility checker analyzes your profile and recommends the best visa pathway for investors, entrepreneurs, and professionals.',
+    heroHeadline: 'Check Your Golden Visa Eligibility.',
+    heroSubheadline: 'The UAE Golden Visa offers 10-year residency for investors, entrepreneurs, and exceptional talents. Find out which pathway is right for you in just 2 minutes.',
+    heroImage: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=2000',
+    contentImage: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=2000',
+    benefits: [],
+    sections: [],
+    faqs: [
+      { question: 'What is the UAE Golden Visa?', answer: 'The Golden Visa is a long-term residency visa that allows foreigners to live, work, and study in the UAE for 10 years with automatic renewal. It doesn\'t require a sponsor.' },
+      { question: 'What are the main Golden Visa categories?', answer: 'Key categories include: Property investors (AED 2M+), Business investors, Entrepreneurs, Specialized talents, Scientists and researchers, Outstanding students, and Humanitarian pioneers.' },
+      { question: 'Can my family get Golden Visas too?', answer: 'Yes. Golden Visa holders can sponsor their spouse, children of any age, and even parents. Family members receive the same 10-year validity.' },
+      { question: 'Do I need to live in Dubai to maintain my Golden Visa?', answer: 'No. Unlike other UAE visas, the Golden Visa has no minimum stay requirement. You can travel freely and stay outside the UAE for extended periods.' }
+    ]
+  },
+  'tools/free-zone-comparison': {
+    id: 'tools/free-zone-comparison',
+    title: 'Free Zone Comparison',
+    metaTitle: 'UAE Free Zone Comparison Tool | Compare 40+ Free Zones | MOVE2DUBAI',
+    metaDescription: 'Compare UAE Free Zones side-by-side. Filter by industry, budget, and location. Find the perfect Free Zone for your business with costs, visa allocations, and benefits.',
+    heroHeadline: 'Compare UAE Free Zones.',
+    heroSubheadline: 'The UAE has over 40 Free Zones, each with unique benefits, costs, and specializations. Find the perfect match for your business with our comprehensive comparison tool.',
+    heroImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000',
+    contentImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000',
+    benefits: [],
+    sections: [],
+    faqs: [
+      { question: 'What is a UAE Free Zone?', answer: 'Free Zones are designated areas in the UAE that offer special benefits including 100% foreign ownership, 0% corporate and personal tax, full profit repatriation, and simplified company setup.' },
+      { question: 'Can I do business outside the Free Zone?', answer: 'Free Zone companies can trade internationally without restrictions. To do business directly within the UAE mainland, you typically need a mainland license or a local agent.' },
+      { question: 'Which Free Zone is best for my business?', answer: 'It depends on your industry, budget, visa requirements, and preferred location. Our comparison tool helps you filter and compare options. Our consultants can provide personalized recommendations.' },
+      { question: 'How long does Free Zone company setup take?', answer: 'Most Free Zone companies can be set up in 3-7 working days. Some Free Zones like IFZA and SHAMS offer even faster processing within 1-3 days.' }
+    ]
   },
   'property': {
     id: 'property',
