@@ -192,14 +192,14 @@ const PremiumImage: React.FC<{
 const HeroStats: React.FC = () => {
   const { ref, isInView } = useInView();
   const families = useCounter(500, 2000, isInView);
-  const assets = useCounter(2.5, 2000, isInView);
+  const assets = useCounter(2, 2000, isInView);
   const success = useCounter(100, 2000, isInView);
 
   return (
-    <div ref={ref} className="grid grid-cols-3 gap-4 sm:gap-8 max-w-2xl">
+    <div ref={ref} className="grid grid-cols-3 gap-3 sm:gap-6 max-w-md sm:max-w-2xl">
       {[
         { value: `${families}+`, label: 'Families' },
-        { value: `£${assets.toFixed(1)}B`, label: 'Assets' },
+        { value: `£${assets}B`, label: 'Assets' },
         { value: `${success}%`, label: 'Success' },
       ].map((stat, i) => (
         <div
@@ -207,8 +207,8 @@ const HeroStats: React.FC = () => {
           className={`text-center transition-all duration-700 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
           style={{ transitionDelay: `${i * 150}ms` }}
         >
-          <div className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-gold stat-value">{stat.value}</div>
-          <div className="text-[10px] sm:text-xs text-white/40 uppercase tracking-wider mt-1">{stat.label}</div>
+          <div className="text-lg sm:text-xl md:text-3xl font-display font-bold text-gold stat-value">{stat.value}</div>
+          <div className="text-[9px] sm:text-[10px] md:text-xs text-white/40 uppercase tracking-wider mt-0.5">{stat.label}</div>
         </div>
       ))}
     </div>
@@ -220,12 +220,12 @@ const StatsSection: React.FC = () => {
   const { ref, isInView } = useInView();
 
   return (
-    <section ref={ref} className="relative py-16 md:py-32 overflow-hidden">
+    <section ref={ref} className="relative py-10 md:py-24 overflow-hidden">
       <div className="absolute inset-0 bg-navy-light" />
       <div className="absolute inset-0 grid-pattern opacity-50" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4 lg:gap-4">
+        <div className="grid grid-cols-2 gap-2 sm:gap-4 lg:grid-cols-4 lg:gap-4">
           {[
             { end: 500, suffix: '+', label: 'Families Relocated', sublabel: 'Since 2019' },
             { end: 5, suffix: 'B+', prefix: '£', label: 'Assets Managed', sublabel: 'Under advisement', isDecimal: true },
@@ -236,14 +236,14 @@ const StatsSection: React.FC = () => {
             return (
               <div
                 key={i}
-                className={`text-center p-4 sm:p-6 lg:p-8 transition-all duration-700 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                className={`text-center p-3 sm:p-5 lg:p-8 transition-all duration-700 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
-                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gold stat-value mb-1 sm:mb-2">
+                <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-gold stat-value mb-0.5 sm:mb-1">
                   {stat.prefix}{stat.isDecimal ? count.toFixed(1) : count}{stat.suffix}
                 </div>
-                <div className="text-white font-medium text-sm sm:text-base mb-0.5 sm:mb-1">{stat.label}</div>
-                <div className="text-xs sm:text-sm text-white/40">{stat.sublabel}</div>
+                <div className="text-white font-medium text-xs sm:text-sm mb-0.5">{stat.label}</div>
+                <div className="text-[10px] sm:text-xs text-white/40">{stat.sublabel}</div>
               </div>
             );
           })}
@@ -1013,7 +1013,7 @@ const App: React.FC = () => {
         <PageTransition pageKey={currentPath}>
           <main>
             {/* Hero */}
-            <section className="relative min-h-screen flex items-center pt-24 pb-32 md:pb-16 overflow-hidden">
+            <section className="relative min-h-[auto] md:min-h-screen flex items-center pt-28 pb-12 md:pt-32 md:pb-20 overflow-hidden">
               <div className="absolute inset-0">
                 <PremiumImage src={page.heroImage} alt={page.title} aspect="w-full h-full" effect="luminous" hoverEffect="none" />
                 <div className="absolute inset-0 hero-gradient" />
@@ -1023,29 +1023,29 @@ const App: React.FC = () => {
               <div className="absolute top-1/4 right-10 w-px h-40 bg-gradient-to-b from-gold/50 to-transparent hidden lg:block" />
               <div className="absolute bottom-1/4 left-10 w-px h-40 bg-gradient-to-t from-gold/50 to-transparent hidden lg:block" />
 
-              <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+              <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full">
                 <div className="max-w-3xl">
-                  <div className="mb-8 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
-                    <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-xs font-medium text-white/80 uppercase tracking-wider">
-                      <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                  <div className="mb-4 md:mb-8 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
+                    <span className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-[10px] md:text-xs font-medium text-white/80 uppercase tracking-wider">
+                      <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-400 rounded-full animate-pulse" />
                       {isArticle ? page.article?.category : 'Elite Relocation Services'}
                     </span>
                   </div>
 
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-white leading-[1.1] mb-4 md:mb-6 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
+                  <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-white leading-[1.15] mb-3 md:mb-6 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
                     {page.heroHeadline}
                   </h1>
 
-                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/70 leading-relaxed mb-8 md:mb-10 max-w-2xl opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
+                  <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-white/70 leading-relaxed mb-6 md:mb-10 max-w-2xl opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
                     {page.heroSubheadline}
                   </p>
 
-                  <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 mb-10 md:mb-16 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
-                    <button onClick={() => setShowConsultation(true)} className="btn-primary px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-xs sm:text-sm uppercase tracking-wider">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-start gap-3 mb-8 md:mb-16 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
+                    <button onClick={() => setShowConsultation(true)} className="btn-primary px-5 sm:px-8 py-3 rounded-lg text-xs sm:text-sm uppercase tracking-wider text-center">
                       Book Free Consultation
                     </button>
                     {!isContact && (
-                      <button onClick={() => navigate('blog')} className="btn-secondary px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-xs sm:text-sm uppercase tracking-wider">
+                      <button onClick={() => navigate('blog')} className="btn-secondary px-5 sm:px-8 py-3 rounded-lg text-xs sm:text-sm uppercase tracking-wider text-center">
                         Explore Insights
                       </button>
                     )}
