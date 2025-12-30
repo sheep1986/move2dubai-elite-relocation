@@ -196,7 +196,7 @@ const HeroStats: React.FC = () => {
   const success = useCounter(100, 2000, isInView);
 
   return (
-    <div ref={ref} className="grid grid-cols-3 gap-8 max-w-2xl">
+    <div ref={ref} className="grid grid-cols-3 gap-4 sm:gap-8 max-w-2xl">
       {[
         { value: `${families}+`, label: 'Families' },
         { value: `£${assets.toFixed(1)}B`, label: 'Assets' },
@@ -207,8 +207,8 @@ const HeroStats: React.FC = () => {
           className={`text-center transition-all duration-700 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
           style={{ transitionDelay: `${i * 150}ms` }}
         >
-          <div className="text-2xl md:text-3xl font-display font-bold text-gold stat-value">{stat.value}</div>
-          <div className="text-xs text-white/40 uppercase tracking-wider mt-1">{stat.label}</div>
+          <div className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-gold stat-value">{stat.value}</div>
+          <div className="text-[10px] sm:text-xs text-white/40 uppercase tracking-wider mt-1">{stat.label}</div>
         </div>
       ))}
     </div>
@@ -1009,7 +1009,7 @@ const App: React.FC = () => {
         <PageTransition pageKey={currentPath}>
           <main>
             {/* Hero */}
-            <section className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
+            <section className="relative min-h-screen flex items-center pt-24 pb-32 md:pb-16 overflow-hidden">
               <div className="absolute inset-0">
                 <PremiumImage src={page.heroImage} alt={page.title} aspect="w-full h-full" effect="luminous" hoverEffect="none" />
                 <div className="absolute inset-0 hero-gradient" />
@@ -1028,20 +1028,20 @@ const App: React.FC = () => {
                     </span>
                   </div>
 
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-white leading-[1.1] mb-6 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-white leading-[1.1] mb-4 md:mb-6 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
                     {page.heroHeadline}
                   </h1>
 
-                  <p className="text-xl md:text-2xl text-white/70 leading-relaxed mb-10 max-w-2xl opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
+                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/70 leading-relaxed mb-8 md:mb-10 max-w-2xl opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
                     {page.heroSubheadline}
                   </p>
 
-                  <div className="flex flex-col sm:flex-row items-start gap-4 mb-16 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
-                    <button onClick={() => setShowConsultation(true)} className="btn-primary px-8 py-4 rounded-lg text-sm uppercase tracking-wider">
+                  <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 mb-10 md:mb-16 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
+                    <button onClick={() => setShowConsultation(true)} className="btn-primary px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-xs sm:text-sm uppercase tracking-wider">
                       Book Free Consultation
                     </button>
                     {!isContact && (
-                      <button onClick={() => navigate('blog')} className="btn-secondary px-8 py-4 rounded-lg text-sm uppercase tracking-wider">
+                      <button onClick={() => navigate('blog')} className="btn-secondary px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-xs sm:text-sm uppercase tracking-wider">
                         Explore Insights
                       </button>
                     )}
@@ -1055,8 +1055,8 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              {/* Scroll indicator */}
-              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 opacity-0 animate-fade-in" style={{ animationDelay: '1.2s', animationFillMode: 'forwards' }}>
+              {/* Scroll indicator - hidden on mobile */}
+              <div className="hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 opacity-0 animate-fade-in" style={{ animationDelay: '1.2s', animationFillMode: 'forwards' }}>
                 <div className="flex flex-col items-center gap-3">
                   <span className="text-xs text-white/40 uppercase tracking-widest">Scroll</span>
                   <div className="w-px h-12 bg-gradient-to-b from-gold to-transparent" />
